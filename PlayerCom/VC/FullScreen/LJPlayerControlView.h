@@ -27,7 +27,15 @@ typedef void (^BlockExitPlay)(void); //
  */
 + (instancetype)sharedPlayerView;
 
-- (instancetype)init:(UIView *)rootView exitPlay:(BlockExitPlay)blockExitPlay;
+- (instancetype)init:(UIView *)rootView
+               title:(NSString *)title
+            videoUrl:(NSURL *)videoUrl
+          isAutoPlay:(BOOL)isAutoPlay
+            exitPlay:(BlockExitPlay)blockExitPlay;
+
+- (instancetype)init:(UIView *)rootView
+            exitPlay:(BlockExitPlay)blockExitPlay;
+
 - (void)setPlayerDataUrl:(NSURL *)playerUrl title:(NSString *)videoTitle isAutoPlay:(BOOL)isAuto;
 - (void)setPlayerDataModel:(LJPlayerDataModel *)playerData isAutoPlay:(BOOL)isAuto;
 

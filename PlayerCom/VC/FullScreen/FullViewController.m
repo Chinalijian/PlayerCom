@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"全屏播放";
+    [self.navigationController setNavigationBarHidden:YES];
     self.videoURL = [NSURL URLWithString:@"http://baobab.wdjcdn.com/1455782903700jy.mp4"];
 //    [self.view addSubview:self.playerView];
 //    [self.playerView playerModel:self.playerModel];
@@ -41,11 +41,14 @@
 }
 
 - (void)ljPlay {
-    self.ljPlayerCtrView = [[LJPlayerControlView alloc] init:self.view exitPlay:^{
-        
+    __weak __typeof(&*self)weakSelf = self;
+    self.ljPlayerCtrView = [[LJPlayerControlView alloc] init:self.view title:@"test" videoUrl:self.videoURL isAutoPlay:YES exitPlay:^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
-    [self.ljPlayerCtrView setPlayerDataUrl:self.videoURL title:@"test" isAutoPlay:YES];
-    [self.view addSubview:self.ljPlayerCtrView];
+    
+//    self.ljPlayerCtrView = [[LJPlayerControlView alloc] init:self.view exitPlay:^{ }];
+//    [self.ljPlayerCtrView setPlayerDataUrl:self.videoURL title:@"test" isAutoPlay:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

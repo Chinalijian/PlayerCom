@@ -9,8 +9,8 @@
 #import "LJPlayerControlView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import <Masonry/Masonry.h>
-@interface LJPlayerControlView ()
+#import "LJPlayerView.h"
+@interface LJPlayerControlView () <LJPlayerViewDelagate>
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVURLAsset *urlAsset;
@@ -27,6 +27,7 @@
 @property (nonatomic, strong) LJPlayerDataModel *playerData;
 
 @property (nonatomic, strong) UIView *videoRootView;//用来显示视频的View
+@property (nonatomic, strong) LJPlayerView *playerOperationView;
 
 @end
 
@@ -48,6 +49,16 @@
     return playerView;
 }
 
+- (instancetype)init:(UIView *)rootView title:(NSString *)title videoUrl:(NSURL *)videoUrl isAutoPlay:(BOOL)isAutoPlay exitPlay:(BlockExitPlay)blockExitPlay {
+    self = [super init];
+    if (self) {
+        self.videoRootView = rootView;
+        self.blockExitPlay = blockExitPlay;
+        [self setPlayerDataUrl:videoUrl title:title isAutoPlay:isAutoPlay];
+    }
+    return self;
+}
+
 - (instancetype)init:(UIView *)rootView exitPlay:(BlockExitPlay)blockExitPlay {
     self = [super init];
     if (self) {
@@ -60,7 +71,9 @@
 /**
  *  初始化player
  */
-- (void)initializeThePlayer {
+- (void)initializeThePlayerSubViews {
+    LJPlayerView *playerOperationView = [[LJPlayerView alloc] init];
+    self.playerOperationView = playerOperationView;
 }
 
 - (void)configPlayerParam {
@@ -80,6 +93,21 @@
     [self setLayerVideoGravityModel:LJLayerVideoGravityModel_Aspect];
     
     [self configureVolume];
+}
+
+#pragma mark -
+#pragma mark - PlayerView delegate event
+/** 返回按钮事件 */
+- (void)clickBackAction:(id)sender {
+    self.blockExitPlay();
+}
+/** 播放按钮事件 */
+- (void)clickPlayerAction:(id)sender {
+    
+}
+/** 暂停按钮事件 */
+- (void)clickPauseAction:(id)sender {
+    
 }
 
 - (void)play {
@@ -118,7 +146,9 @@
 }
 
 - (void)setPlayerDataUrl:(NSURL *)playerUrl title:(NSString *)videoTitle isAutoPlay:(BOOL)isAuto {
-    
+    if (OBJ_IS_NIL(playerUrl)) {
+        return;
+    }
     if (!_playerData) {
         _playerData = [[LJPlayerDataModel alloc] init];
     }
@@ -128,6 +158,8 @@
 }
 
 - (void)setPlayerDataModel:(LJPlayerDataModel *)playerData isAutoPlay:(BOOL)isAuto {
+    
+    [self initializeThePlayerSubViews];
     
     if (!_playerData) {
         _playerData = [[LJPlayerDataModel alloc] init];
@@ -180,5 +212,18 @@
     self.playerLayer.frame = self.bounds;
     [self.layer insertSublayer:self.playerLayer atIndex:0];
 }
+
+- (void)setPlayerOperationView:(LJPlayerView *)playerOperationView {
+    if (_playerOperationView) {
+        return;
+    }
+    _playerOperationView = playerOperationView;
+    playerOperationView.delegate = self;
+    [self addSubview:playerOperationView];
+    [playerOperationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+}
+
 
 @end

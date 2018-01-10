@@ -114,6 +114,7 @@
 		2A5F9F1B1FE26B520062ADDD /* ZFPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerModel.m; sourceTree = "<group>"; };
 		2A5F9F1C1FE26B520062ADDD /* ZFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerView.h; sourceTree = "<group>"; };
 		2A5F9F1D1FE26B520062ADDD /* ZFPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerView.m; sourceTree = "<group>"; };
+		2A6E5EA22005FB30005D5A9F /* PlayerCom-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayerCom-Prefix.pch"; sourceTree = "<group>"; };
 		2A763E371FF4DE2600D08FAA /* LJPlayerDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LJPlayerDataModel.h; sourceTree = "<group>"; };
 		2A763E381FF4DE2600D08FAA /* LJPlayerDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LJPlayerDataModel.m; sourceTree = "<group>"; };
 		2A763E3A1FF4FEE200D08FAA /* LJPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LJPlayerView.h; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 				2A3A1C161FDFB0AC00951196 /* LaunchScreen.storyboard */,
 				2A3A1C191FDFB0AC00951196 /* Info.plist */,
 				2A3A1C1A1FDFB0AC00951196 /* main.m */,
+				2A6E5EA22005FB30005D5A9F /* PlayerCom-Prefix.pch */,
 			);
 			path = PlayerCom;
 			sourceTree = "<group>";
@@ -681,13 +683,15 @@
 			baseConfigurationReference = FB5D4F50EFA614440FCB74EC /* Pods-PlayerCom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR9B47C6A9;
+				GCC_PREFIX_HEADER = "PlayerCom/PlayerCom-Prefix.pch";
 				INFOPLIST_FILE = PlayerCom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.discovermelody.PlayerCom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -696,13 +700,15 @@
 			baseConfigurationReference = 96A1D6F860245DE918ABF3DB /* Pods-PlayerCom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR9B47C6A9;
+				GCC_PREFIX_HEADER = "PlayerCom/PlayerCom-Prefix.pch";
 				INFOPLIST_FILE = PlayerCom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.discovermelody.PlayerCom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
